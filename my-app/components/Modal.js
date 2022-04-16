@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const ModalMobile = props => {
     const { item, title, body, actionTitle,modalVisible,closeModal, onHandlerModal } = props;
 
-  const handlerOnPres = (id) =>{
+  const handlerOnPres = (id) => {
     closeModal()
     onHandlerModal(id);
   };
@@ -39,7 +39,7 @@ const ModalMobile = props => {
   )
 }
 
-Modal.propTypes = {}
+Modal.propTypes = {};
 
 const styles = StyleSheet.create({
     modalCentered: {
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     titleText: {
       color: 'white',
       fontWeight: 'bold',
-      fontSize: 15
+      fontSize: 15,
+      fontFamily: 'OpenSansBold'
     },
     modalButton: {
       flex:2,

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, View,Text, FlatList } from 'react-native';
 import PropTypes from 'prop-types'
-import Item from './Index';
+import Item from './Item';
 import ModalMobile from '../Modal';
 
 const ListItem = props => {
@@ -9,7 +9,7 @@ const ListItem = props => {
     const {containerList, emptyList, title}  = styles;
     const [item, setItem] = useState({})
     const [listItems, setItems] = useState(items);
-    const [ modalVisible, setModalVisible ] = useState(false);
+    const [modalVisible, setModalVisible ] = useState(false);
     const [modalMsg, setModalMsg] = useState('');
     
     useEffect(() => {
@@ -21,8 +21,8 @@ const ListItem = props => {
       setModalMsg("DESEA ELIMINAR EL ITEM");
       setModalVisible(true)
     }
-    const onHandlerModal = id =>{
-      const updateList = listItems.find ( item => item.id !== id) || []
+    const onHandlerModal = id => {
+      const updateList = listItems.filter( (item) => item.id !== id)
       setItems(updateList);
       setModalVisible(false)
       handlerModal(updateList)

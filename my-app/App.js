@@ -1,23 +1,31 @@
 import { StyleSheet, View } from 'react-native';
 import { useState } from "react";
-import ListItem from './components/List/ListItem';
-import AddItem from './components/AddItem';
+import ItemList from './components/List/ItemList';
+import AddItem from './components/AddItem/AddItem';
 
-const App = () =>{
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+export default function App() {
+  const [loaded] = useFonts({
+    OpenSans: require('./assets/fonts/OpenSans-Regular.ttf'),
+    OpenSansBold: require('./assets/fonts/OpenSans-Bold.ttf')
+  })
+
   const [items, setItems] = useState([]);
   const [counter, setCounter] = useState(0);
 
   const handleOnPress = value => {
-
     const newItem = {id: counter, value}
     setItems([...items, newItem]);
-    setCounter(counter+1);
+    setCounter(counter + 1);
   }
   const handlerModal = (items) =>{
     setItems(items)
   }
   
   const {container}  = styles;
+  if(!loaded) return <AppLoading/>
   return (
     <View style={container}>
       <AddItem
@@ -25,7 +33,7 @@ const App = () =>{
         buttonValue= {"Agregar"}
         handleOnPress={handleOnPress}
         />
-      <ListItem
+      <ItemList
           items={items}
           emptyListMsg= {'NO SE ENCONTRARON ELEMENTOS EN LA LISTA'}
           headerList = {'LISTA DE ITEMS'}
@@ -33,6 +41,7 @@ const App = () =>{
       /> 
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -56,5 +65,3 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
 });
-
-export default App;
